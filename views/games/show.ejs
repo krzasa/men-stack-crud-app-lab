@@ -9,7 +9,10 @@
     <h1><%= game.name %></h1> <!-- Display game name -->
     <!-- Add more details about the fruit here -->
     <h2><%= game.description %></h2>
-
-    <a href="/games">Back to Fruits</a>
+    <form action="/games/<%=game._id%>?_method=DELETE" method="POST">
+      <button type="submit">Delete <%= game.name %></button>
+    </form>
+    <a href="/games/<%= game._id %>/edit">Edit <%= game.name %></a> <br>
+    <a href="/games">Back to Games</a>
   </body>
 </html>
