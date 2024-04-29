@@ -14,20 +14,29 @@ app.get("/", async (req, res) => {
     res.render("index.ejs");
   });
 app.post("/games", async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     
       await Game.create(req.body);
     // res.redirect("fruits/new");
     res.redirect('/games')
   });
   app.get('/games', async (req,res) =>{
-    const foundGames = await Game.find()
-    res.send(foundGames)
+    const allGames = await Game.find()
+    res.render("games/home.ejs", {games: allGames})
 })
   app.get("/games/new",  (req, res) => {
     // res.send("This route sends the user a form page!");
     res.render("games/new.ejs");
   })
+
+
+  app.get("/games/:gamesId", async (req, res) => {
+    const foundGame = await Game.findById(req.params.gamesId)
+    res.render("games/show.ejs", {
+      game:foundGame
+    })
+    // console.log(foundGame); 
+  });
 
 
 
